@@ -5,8 +5,6 @@ import lombok.Setter;
 import lombok.NoArgsConstructor;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-import java.io.Serializable;
-
 /**
  * Base class for bank user model.
  *
@@ -17,7 +15,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @JsonPropertyOrder({"name", "lastName", "accountNumber", "amount",
         "transactionType", "email", "active", "country", "telephone", "id"})
-public class BankUserModel implements Serializable {
+public class BankUserModel {
     private String name;
     private String lastName;
     private String accountNumber;

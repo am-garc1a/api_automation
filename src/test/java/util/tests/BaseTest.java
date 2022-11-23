@@ -14,19 +14,21 @@ import io.restassured.path.json.JsonPath;
 public class BaseTest {
     protected Response res;
     protected JsonPath jsonPath;
+    protected WorkFlow workFlow;
 
     /**
      * SetUp before to run suite of test.
      *
      * @author am.garcia
      */
-    @BeforeClass
+    @BeforeMethod
     public void setup() {
         RestAssuredUtil.setBaseURI("https://637bb09f72f3ce38ea92c648.mockapi.io/am-garc1a/");
         RestAssuredUtil.setBasePath("bank");
         RestAssuredUtil.setContentType(ContentType.JSON);
         this.res = null;
         this.jsonPath = null;
+        this.workFlow = new WorkFlow();
     }
 
     /**
@@ -34,7 +36,7 @@ public class BaseTest {
      *
      * @author am.garcia
      */
-    @AfterClass
+    @AfterMethod
     public void afterTest() {
         RestAssuredUtil.resetBaseURI();
         RestAssuredUtil.resetBasePath();

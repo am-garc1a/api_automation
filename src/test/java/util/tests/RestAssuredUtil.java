@@ -56,6 +56,15 @@ public class RestAssuredUtil {
     /**
      * Get response given specifications.
      *
+     * @return : response given conditions
+     */
+    public static Response getResponse() {
+        return given().get();
+    }
+
+    /**
+     * Get response given specifications.
+     *
      * @param path : path
      * @return : response given conditions
      */
@@ -64,11 +73,13 @@ public class RestAssuredUtil {
     }
 
     /**
-     * Get response given specifications.
+     * Delete response given specifications.
      *
+     * @param path : path
      * @return : response given conditions
      */
-    public static Response getResponse() {
-        return given().get();
+    public static Response deleteResponse(String path) {
+        return given().delete(path);
     }
+
 }

@@ -1,5 +1,6 @@
 package tests;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import model.BankUserModel;
@@ -19,19 +20,21 @@ public class DataSetTest extends BaseTest {
     public void emptyDataSet() {
         Reporter.info("TEST START, empty data set---------------");
 
-        String path = "";
+        Reporter.info("Getting data set");
+        List<BankUserModel> bankUsersData = workFlow.getAllDataSet(res, jsonPath);
 
-        res = RestAssuredUtil.getResponse();
+        Reporter.info("Extracting ids if it exists");
+        List<String> ids = workFlow.getDataIds(bankUsersData);
 
-        Reporter.info("Validate status of get data set");
-        isStatus200(res);
+        Reporter.info("Deleting data if it exists");
+        ids.forEach(id -> {
+            res = RestAssuredUtil.deleteResponse(id);
+            isStatus200(res);
+        });
 
-        jsonPath = res.jsonPath();
-        List<BankUserModel> bankUsersData = jsonPath.getList(path, BankUserModel.class);
-
-        for (BankUserModel userBank : bankUsersData) {
-            System.out.println(userBank);
-        }
+        Reporter.info("Validate data set is empty");
+        bankUsersData = workFlow.getAllDataSet(res, jsonPath);
+        Assert.assertEquals(bankUsersData.size(), 0);
 
         Reporter.info("TEST FINISH, empty data set---------------");
     }
@@ -43,7 +46,7 @@ public class DataSetTest extends BaseTest {
     }
 
     @Test(priority = 3)
-    public void getAllDataSet() {
+    public void getDataSetWithoutDuplicity() {
         Reporter.info("TEST START, get all data set---------------");
         Reporter.info("TEST FINISH, get all data set---------------");
     }

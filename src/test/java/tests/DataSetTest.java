@@ -9,7 +9,9 @@ import util.tests.BaseTest;
 import util.tests.RestAssuredUtil;
 import util.repoter.Reporter;
 
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import static org.apache.http.HttpStatus.*;
 
@@ -66,6 +68,19 @@ public class DataSetTest extends BaseTest {
     @Test(priority = 3)
     public void getDataSetWithoutDuplicity() {
         Reporter.info("TEST START, get all data set---------------");
+
+        Reporter.info("Getting data set");
+        List<BankUserModel> bankUsersData = workFlow.getAllDataSet(res, jsonPath);
+
+        Set<String> usersEmail = new LinkedHashSet<String>();
+
+        bankUsersData.forEach(user -> {
+            usersEmail.add(user.getEmail());
+        });
+
+        Reporter.info("Validate that emails are unique");
+        Assert.assertEquals(bankUsersData.size(), usersEmail.size(), "Data set has emails duplicated!");
+
         Reporter.info("TEST FINISH, get all data set---------------");
     }
 

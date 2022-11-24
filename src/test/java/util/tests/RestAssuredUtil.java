@@ -83,4 +83,15 @@ public class RestAssuredUtil {
         return given().contentType("application/json").body(newUserBank).post();
     }
 
+    /**
+     * Put response given specifications.
+     *
+     * @param jsonEmail : email to update
+     * @param path      : user id to update
+     * @return : response given conditions
+     */
+    public static Response putResponse(String jsonEmail, String path) {
+        return given().contentType("application/json").body(jsonEmail).put(path);
+    }
+
 }

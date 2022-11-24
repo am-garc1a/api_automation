@@ -1,10 +1,13 @@
 package util.tests;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import com.github.javafaker.Faker;
 import model.BankUserModel;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -98,6 +101,30 @@ public class WorkFlow {
         while (newUsersList.size() < amountOfNewUsers);
 
         return newUsersList;
+    }
+
+    public List<BankUserModel> createNewUserIfDataSetEmpty(Response res, JsonPath jsonPath) {
+
+        List<BankUserModel> bankUsersData = getAllDataSet(res, jsonPath);
+
+        if (bankUsersData.size() == 0) {
+            RestAssuredUtil.postResponse(bankUserCreation());
+        }
+
+        return getAllDataSet(res, jsonPath);
+    }
+
+    public String getJsonOfUserToUpdate(Response res, String idToUpdate) throws JsonProcessingException {
+        BankUserModel bankUser = getBankUser(res, idToUpdate);
+        bankUser.setEmail("another-email@gmail.com");
+
+        ObjectMapper Obj = new ObjectMapper();
+
+        try {
+            return Obj.writeValueAsString(bankUser);
+        } catch (IOException e) {
+            return " ";
+        }
     }
 
 }

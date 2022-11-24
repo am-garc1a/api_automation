@@ -1,5 +1,6 @@
 package tests;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -36,7 +37,7 @@ public class DataSetTest extends BaseTest {
             Assert.assertEquals(res.getStatusCode(), SC_OK, "Delete petition failed!");
         });
 
-        Reporter.info("Validate data set is empty");
+        Reporter.info("Validation data set is empty");
         bankUsersData = workFlow.getAllDataSet(res, jsonPath);
         Assert.assertEquals(bankUsersData.size(), 0, "Data set is not empty");
 
@@ -59,7 +60,7 @@ public class DataSetTest extends BaseTest {
         Reporter.info("Getting data set");
         List<BankUserModel> bankUsersData = workFlow.getAllDataSet(res, jsonPath);
 
-        Reporter.info("Validate data set is not empty");
+        Reporter.info("Validation data set is not empty");
         Assert.assertTrue(bankUsersData.size() > 0, "Data set is empty");
 
         Reporter.info("TEST FINISH, data set initialize---------------");
@@ -78,19 +79,26 @@ public class DataSetTest extends BaseTest {
             usersEmail.add(user.getEmail());
         });
 
-        Reporter.info("Validate that emails are unique");
+        Reporter.info("Validation that emails are unique");
         Assert.assertEquals(bankUsersData.size(), usersEmail.size(), "Data set has emails duplicated!");
 
         Reporter.info("TEST FINISH, confirm user is unique---------------");
     }
 
     @Test(priority = 4)
-    public void updateDataSet() {
+    public void updateDataSet() throws JsonProcessingException {
         Reporter.info("TEST START, update data set---------------");
 
-       /* BankUserModel bankUser = workFlow.getBankUser(res, "/1");
+        Reporter.info("Getting data set");
+        List<BankUserModel> bankUsersData = workFlow.createNewUserIfDataSetEmpty(res, jsonPath);
+        String idToUpdate = bankUsersData.get(0).getId();
 
-        System.out.println("user " + bankUser);*/
+        Reporter.info("Getting first user");
+        String userJson = workFlow.getJsonOfUserToUpdate(res, idToUpdate);
+
+        Reporter.info("Validation of email update");
+        res = RestAssuredUtil.putResponse(userJson, idToUpdate);
+        Assert.assertEquals(res.getStatusCode(), SC_OK, "Update petition failed!");
 
         Reporter.info("TEST FINISH, update data set---------------");
     }

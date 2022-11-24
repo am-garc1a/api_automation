@@ -11,7 +11,7 @@ import util.repoter.Reporter;
 
 import java.util.List;
 
-import static org.apache.http.HttpStatus.SC_OK;
+import static org.apache.http.HttpStatus.*;
 
 /**
  * Class for testing data set.
@@ -31,7 +31,7 @@ public class DataSetTest extends BaseTest {
         Reporter.info("Deleting data if it exists");
         ids.forEach(id -> {
             res = RestAssuredUtil.deleteResponse(id);
-            Assert.assertEquals(res.getStatusCode(), SC_OK, "Petition failed!");
+            Assert.assertEquals(res.getStatusCode(), SC_OK, "Delete petition failed!");
         });
 
         Reporter.info("Validate data set is empty");
@@ -44,6 +44,22 @@ public class DataSetTest extends BaseTest {
     @Test(priority = 2)
     public void dataSetInitialize() {
         Reporter.info("TEST START, data set initialize---------------");
+
+        Reporter.info("Creating a list of 10 new BankUserModel objects");
+        List<BankUserModel> newUserBank = workFlow.bankUserListCreation(10);
+
+        Reporter.info("Creating 10 new users");
+        newUserBank.forEach(user -> {
+            res = RestAssuredUtil.postResponse(user);
+            Assert.assertEquals(res.getStatusCode(), SC_CREATED, "Post petition failed!");
+        });
+
+        Reporter.info("Getting data set");
+        List<BankUserModel> bankUsersData = workFlow.getAllDataSet(res, jsonPath);
+
+        Reporter.info("Validate data set is not empty");
+        Assert.assertTrue(bankUsersData.size() > 0, "Data set is empty");
+
         Reporter.info("TEST FINISH, data set initialize---------------");
     }
 
@@ -56,6 +72,11 @@ public class DataSetTest extends BaseTest {
     @Test(priority = 4)
     public void updateDataSet() {
         Reporter.info("TEST START, update data set---------------");
+
+       /* BankUserModel bankUser = workFlow.getBankUser(res, "/1");
+
+        System.out.println("user " + bankUser);*/
+
         Reporter.info("TEST FINISH, update data set---------------");
     }
 }

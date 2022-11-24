@@ -1,7 +1,6 @@
 package util.tests;
 
 import org.testng.annotations.*;
-import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.path.json.JsonPath;
 
@@ -24,7 +23,6 @@ public class BaseTest {
     public void setup() {
         RestAssuredUtil.setBaseURI("https://637bb09f72f3ce38ea92c648.mockapi.io/am-garc1a/");
         RestAssuredUtil.setBasePath("bank");
-        RestAssuredUtil.setContentType(ContentType.JSON);
         this.res = null;
         this.jsonPath = null;
         this.workFlow = new WorkFlow();

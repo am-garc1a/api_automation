@@ -1,8 +1,8 @@
 package util.tests;
 
 import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import model.BankUserModel;
 
 import static io.restassured.RestAssured.given;
 
@@ -45,15 +45,6 @@ public class RestAssuredUtil {
     }
 
     /**
-     * Set content type for specification.
-     *
-     * @param Type : type
-     */
-    public static void setContentType(ContentType Type) {
-        given().contentType(Type);
-    }
-
-    /**
      * Get response given specifications.
      *
      * @return : response given conditions
@@ -63,7 +54,7 @@ public class RestAssuredUtil {
     }
 
     /**
-     * Get response given specifications.
+     * Get response for specific id given specifications.
      *
      * @param path : path
      * @return : response given conditions
@@ -80,6 +71,16 @@ public class RestAssuredUtil {
      */
     public static Response deleteResponse(String path) {
         return given().delete(path);
+    }
+
+    /**
+     * Post response given specifications.
+     *
+     * @param newUserBank : object to sent
+     * @return : response given conditions
+     */
+    public static Response postResponse(BankUserModel newUserBank) {
+        return given().contentType("application/json").body(newUserBank).post();
     }
 
 }

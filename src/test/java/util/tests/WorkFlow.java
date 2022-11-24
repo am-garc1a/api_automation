@@ -130,9 +130,11 @@ public class WorkFlow {
      * @return : json in string form
      * @throws JsonProcessingException : exception if object can't be converted to json
      */
-    public String getJsonOfUserToUpdate(Response res, String idToUpdate) throws JsonProcessingException {
+    public String getJsonOfUserToUpdate(Response res,
+                                        String idToUpdate, String newEmail) throws JsonProcessingException {
+
         BankUserModel bankUser = getBankUser(res, idToUpdate);
-        bankUser.setEmail("another-email@gmail.com");
+        bankUser.setEmail(newEmail);
 
         ObjectMapper Obj = new ObjectMapper();
 
@@ -141,6 +143,7 @@ public class WorkFlow {
         } catch (IOException e) {
             return " ";
         }
+
     }
 
 }

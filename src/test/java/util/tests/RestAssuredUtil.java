@@ -31,10 +31,10 @@ public class RestAssuredUtil {
     /**
      * Set base path for specification.
      *
-     * @param basePathTerm : path
+     * @param basePath : path
      */
-    public static void setBasePath(String basePathTerm) {
-        RestAssured.basePath = basePathTerm;
+    public static void setBasePath(String basePath) {
+        RestAssured.basePath = basePath;
     }
 
     /**

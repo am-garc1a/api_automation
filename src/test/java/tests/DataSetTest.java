@@ -94,7 +94,7 @@ public class DataSetTest extends BaseTest {
         String idToUpdate = bankUsersData.get(0).getId();
 
         Reporter.info("Getting first user");
-        String userJson = workFlow.getJsonOfUserToUpdate(res, idToUpdate);
+        String userJson = workFlow.getJsonOfUserToUpdate(res, idToUpdate, "another-email@gmail.com");
 
         Reporter.info("Validation of email update");
         res = RestAssuredUtil.putResponse(userJson, idToUpdate);

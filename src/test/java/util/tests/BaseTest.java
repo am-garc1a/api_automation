@@ -1,6 +1,5 @@
 package util.tests;
 
-import org.testng.Assert;
 import org.testng.annotations.*;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -40,15 +39,6 @@ public class BaseTest {
     public void afterTest() {
         RestAssuredUtil.resetBaseURI();
         RestAssuredUtil.resetBasePath();
-    }
-
-    /**
-     * Method to check if status code of response is 200.
-     *
-     * @param res : response
-     */
-    public void isStatus200(Response res) {
-        Assert.assertEquals(res.getStatusCode(), 200, "Status 200 Failed!");
     }
 
 }

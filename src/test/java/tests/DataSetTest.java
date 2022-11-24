@@ -11,6 +11,8 @@ import util.repoter.Reporter;
 
 import java.util.List;
 
+import static org.apache.http.HttpStatus.SC_OK;
+
 /**
  * Class for testing data set.
  */
@@ -29,12 +31,12 @@ public class DataSetTest extends BaseTest {
         Reporter.info("Deleting data if it exists");
         ids.forEach(id -> {
             res = RestAssuredUtil.deleteResponse(id);
-            isStatus200(res);
+            Assert.assertEquals(res.getStatusCode(), SC_OK, "Petition failed!");
         });
 
         Reporter.info("Validate data set is empty");
         bankUsersData = workFlow.getAllDataSet(res, jsonPath);
-        Assert.assertEquals(bankUsersData.size(), 0);
+        Assert.assertEquals(bankUsersData.size(), 0, "Data set is not empty");
 
         Reporter.info("TEST FINISH, empty data set---------------");
     }

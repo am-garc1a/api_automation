@@ -18,8 +18,8 @@ public class WorkFlow {
     /**
      * Get all date set method.
      *
-     * @param res      : http response
-     * @param jsonPath : json path
+     * @param res      : parameter of type http response
+     * @param jsonPath : parameter of type json path
      * @return : all data as list of BankUserModel object
      */
     public List<BankUserModel> getAllDataSet(Response res, JsonPath jsonPath) {
@@ -31,7 +31,7 @@ public class WorkFlow {
     /**
      * Get specific bank user.
      *
-     * @param res : http response
+     * @param res : parameter of type http response
      * @return : specific bank user of BankUserModel object
      */
     public BankUserModel getBankUser(Response res, String userId) {
@@ -43,6 +43,7 @@ public class WorkFlow {
      * Get data set ids.
      *
      * @param bankUsersData : List of bankUsersData
+     * @return : list of users id
      */
     public List<String> getDataIds(List<BankUserModel> bankUsersData) {
         List<String> ids = new ArrayList<>();
@@ -103,6 +104,13 @@ public class WorkFlow {
         return newUsersList;
     }
 
+    /**
+     * Return a list of BankUserModel objects.
+     *
+     * @param res      : parameter of type http response
+     * @param jsonPath : parameter of type json path
+     * @return : data as list of BankUserModel object
+     */
     public List<BankUserModel> createNewUserIfDataSetEmpty(Response res, JsonPath jsonPath) {
 
         List<BankUserModel> bankUsersData = getAllDataSet(res, jsonPath);
@@ -114,6 +122,14 @@ public class WorkFlow {
         return getAllDataSet(res, jsonPath);
     }
 
+    /**
+     * Get json of user to update.
+     *
+     * @param res        : parameter of type http response
+     * @param idToUpdate : user id to update
+     * @return : json in string form
+     * @throws JsonProcessingException : exception if object can't be converted to json
+     */
     public String getJsonOfUserToUpdate(Response res, String idToUpdate) throws JsonProcessingException {
         BankUserModel bankUser = getBankUser(res, idToUpdate);
         bankUser.setEmail("another-email@gmail.com");

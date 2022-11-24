@@ -67,7 +67,7 @@ public class DataSetTest extends BaseTest {
 
     @Test(priority = 3)
     public void getDataSetWithoutDuplicity() {
-        Reporter.info("TEST START, get all data set---------------");
+        Reporter.info("TEST START, confirm user is unique---------------");
 
         Reporter.info("Getting data set");
         List<BankUserModel> bankUsersData = workFlow.getAllDataSet(res, jsonPath);
@@ -81,7 +81,7 @@ public class DataSetTest extends BaseTest {
         Reporter.info("Validate that emails are unique");
         Assert.assertEquals(bankUsersData.size(), usersEmail.size(), "Data set has emails duplicated!");
 
-        Reporter.info("TEST FINISH, get all data set---------------");
+        Reporter.info("TEST FINISH, confirm user is unique---------------");
     }
 
     @Test(priority = 4)

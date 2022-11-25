@@ -131,10 +131,10 @@ public class WorkFlow {
      * @throws JsonProcessingException : exception if object can't be converted to json
      */
     public String getJsonOfUserToUpdate(Response res,
-                                        String idToUpdate, String newEmail) throws JsonProcessingException {
+                                        String idToUpdate, String newAccountNumber) throws JsonProcessingException {
 
         BankUserModel bankUser = getBankUser(res, idToUpdate);
-        bankUser.setEmail(newEmail);
+        bankUser.setAccountNumber(newAccountNumber);
 
         ObjectMapper Obj = new ObjectMapper();
 

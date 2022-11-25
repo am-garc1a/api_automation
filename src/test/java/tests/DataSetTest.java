@@ -94,9 +94,9 @@ public class DataSetTest extends BaseTest {
         String idToUpdate = bankUsersData.get(0).getId();
 
         Reporter.info("Getting first user");
-        String userJson = workFlow.getJsonOfUserToUpdate(res, idToUpdate, "another-email@gmail.com");
+        String userJson = workFlow.getJsonOfUserToUpdate(res, idToUpdate, "321369");
 
-        Reporter.info("Validation of email update");
+        Reporter.info("Validation of account number update");
         res = RestAssuredUtil.putResponse(userJson, idToUpdate);
         Assert.assertEquals(res.getStatusCode(), SC_OK, "Update petition failed!");
 

@@ -120,13 +120,13 @@ public class WorkFlow {
     }
 
     /**
-     * Get objected updated.
+     * Get object updated.
      *
      * @param res        : parameter of type http response
      * @param idToUpdate : user id to update
      * @return : BankUserModel object
      */
-    public BankUserModel getJsonOfUserToUpdate(Response res, String idToUpdate, String newAccountNumber) {
+    public BankUserModel getUserObjectUpdated(Response res, String idToUpdate, String newAccountNumber) {
         BankUserModel bankUser = getBankUser(res, idToUpdate);
         bankUser.setAccountNumber(newAccountNumber);
         return bankUser;

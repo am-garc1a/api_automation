@@ -93,7 +93,7 @@ public class DataSetTest extends BaseTest {
         String idToUpdate = bankUsersData.get(0).getId();
 
         Reporter.info("Getting user updated");
-        BankUserModel userUpdated = workFlow.getJsonOfUserToUpdate(res, idToUpdate, "321369");
+        BankUserModel userUpdated = workFlow.getUserObjectUpdated(res, idToUpdate, "321369");
 
         Reporter.info("Validation of account number update");
         res = RestAssuredUtil.putResponse(userUpdated, idToUpdate);

@@ -12,5 +12,5 @@ Note: to run all test you can run DataSetSuite.xml
 
 Test evidence
 
-![test_1](https://raw.githubusercontent.com/am-garc1a/api_automation/main/src/assets/images/test_1.PNG)
-![test_2](https://raw.githubusercontent.com/am-garc1a/api_automation/main/src/assets/images/test_2.PNG)
+![test_1](https://raw.githubusercontent.com/am-garc1a/api_automation/main/src/assets/images/1.PNG)
+![test_2](https://raw.githubusercontent.com/am-garc1a/api_automation/main/src/assets/images/2.PNG)

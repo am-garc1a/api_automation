@@ -1,13 +1,10 @@
 package util.tests;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import com.github.javafaker.Faker;
 import model.BankUserModel;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -123,27 +120,16 @@ public class WorkFlow {
     }
 
     /**
-     * Get json of user to update.
+     * Get objected updated.
      *
      * @param res        : parameter of type http response
      * @param idToUpdate : user id to update
-     * @return : json in string form
-     * @throws JsonProcessingException : exception if object can't be converted to json
+     * @return : BankUserModel object
      */
-    public String getJsonOfUserToUpdate(Response res,
-                                        String idToUpdate, String newAccountNumber) throws JsonProcessingException {
-
+    public BankUserModel getJsonOfUserToUpdate(Response res, String idToUpdate, String newAccountNumber) {
         BankUserModel bankUser = getBankUser(res, idToUpdate);
         bankUser.setAccountNumber(newAccountNumber);
-
-        ObjectMapper Obj = new ObjectMapper();
-
-        try {
-            return Obj.writeValueAsString(bankUser);
-        } catch (IOException e) {
-            return " ";
-        }
-
+        return bankUser;
     }
 
 }

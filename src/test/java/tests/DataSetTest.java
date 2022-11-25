@@ -1,6 +1,5 @@
 package tests;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -86,18 +85,18 @@ public class DataSetTest extends BaseTest {
     }
 
     @Test(priority = 4)
-    public void updateDataSet() throws JsonProcessingException {
+    public void updateDataSet() {
         Reporter.info("TEST START, update data set---------------");
 
         Reporter.info("Getting data set");
         List<BankUserModel> bankUsersData = workFlow.createNewUserIfDataSetEmpty(res, jsonPath);
         String idToUpdate = bankUsersData.get(0).getId();
 
-        Reporter.info("Getting first user");
-        String userJson = workFlow.getJsonOfUserToUpdate(res, idToUpdate, "321369");
+        Reporter.info("Getting user updated");
+        BankUserModel userUpdated = workFlow.getJsonOfUserToUpdate(res, idToUpdate, "321369");
 
         Reporter.info("Validation of account number update");
-        res = RestAssuredUtil.putResponse(userJson, idToUpdate);
+        res = RestAssuredUtil.putResponse(userUpdated, idToUpdate);
         Assert.assertEquals(res.getStatusCode(), SC_OK, "Update petition failed!");
 
         Reporter.info("TEST FINISH, update data set---------------");
